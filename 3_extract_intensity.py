@@ -23,7 +23,7 @@ R = min(params.X[1] - params.X[0], params.Y[1] - params.Y[0]) // 2
 
 fp = FilePattern(str(IMAGE_PATH.parent), "{index:d+}.ome.tif")
 
-temperature_range = [37, 90]
+temperature_range = [37, 95]
 
 # Write a csv file
 with open(".data/output/plate.csv", "w") as fw:
@@ -37,6 +37,7 @@ with open(".data/output/plate.csv", "w") as fw:
     for index, files in fp(pydantic_output=False):
         for file in files:
 
+            # TODO: Verify this formula
             # Get the temperature
             temp = temperature_range[0] + (index["index"] - 1) / (len(fp) - 1) * (
                 temperature_range[1] - temperature_range[0]
